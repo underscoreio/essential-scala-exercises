@@ -18,13 +18,24 @@ lazy val functionExpressions = project
   .dependsOn(utilities)
   .settings(commonSettings("functionExpressions"))
 
+lazy val filmographyPart1 = project
+  .in(file("4-filmographyPart1"))
+  .dependsOn(utilities)
+  .settings(commonSettings("filmographyPart1"))
+
 lazy val utilities = project
   .in(file("utilities"))
   .settings(commonSettings("utilities"))
 
 lazy val root = project
   .in(file("."))
-  .aggregate(hello, expressions, listExpressions, functionExpressions)
+  .aggregate(
+    hello,
+    expressions,
+    listExpressions,
+    functionExpressions,
+    filmographyPart1,
+  )
 
 def commonSettings(projectName: String) =
   Seq(

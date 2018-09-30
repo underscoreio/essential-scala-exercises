@@ -4,9 +4,9 @@ object Expressions extends Exercise {
 
   // Write a method called greet that:
   // - accepts a String name as a parameter
-  // - prints a friendly personalised greeting (e.g. "Hello name")
-  def greet(name: String): Unit =
-    println(s"Hello $name")
+  // - returns a friendly greeting (e.g. "Hello name")
+  def greet(name: String): String =
+    s"Hello $name!"
 
   // Write a method called isPalindrome that:
   // - accepts a String as a parameter

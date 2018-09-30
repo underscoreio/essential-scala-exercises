@@ -16,10 +16,6 @@ object ListExpressions extends Exercise {
       nums.head + sum(nums.tail)
     }
 
-  println("SUM")
-  println(sum(List(1, 2, 3)))
-  println()
-
   // Write a method that:
   // - accepts a list of numbers l and a number n as parameters
   // - returns true if n appears within l, false otherwise
@@ -30,11 +26,6 @@ object ListExpressions extends Exercise {
       l.head == n || contains(l.tail, n)
     }
 
-  println("CONTAINS")
-  println(contains(List(1, 2, 3), 2))
-  println(contains(List(1, 2, 3), 4))
-  println()
-
   // (Harder) Write a method that:
   // - accepts two lists of numbers x and y
   // - returns true every number in y appears in x
@@ -44,11 +35,6 @@ object ListExpressions extends Exercise {
     } else {
       contains(x, y.head) && containsAll(x, y.tail)
     }
-
-  println("CONTAINS ALL")
-  println(containsAll(List(1, 2, 3), List(2, 3)))
-  println(containsAll(List(1, 2, 3), List(4, 3)))
-  println()
 
   // (Harder still) Write a method that:
   // - accepts an Int max as a parameter
@@ -70,9 +56,24 @@ object ListExpressions extends Exercise {
     loop(1, Nil)
   }
 
-  println("SQUARE NUMBERS")
-  println(squareNumbers(10))
-  println(squareNumbers(20))
-  println()
+  override def main(args: Array[String]): Unit = {
+    println("SUM")
+    println(sum(List(1, 2, 3)))
+    println()
 
+    println("CONTAINS")
+    println(contains(List(1, 2, 3), 2))
+    println(contains(List(1, 2, 3), 4))
+    println()
+
+    println("CONTAINS ALL")
+    println(containsAll(List(1, 2, 3), List(2, 3)))
+    println(containsAll(List(1, 2, 3), List(4, 3)))
+    println()
+
+    println("SQUARE NUMBERS")
+    println(squareNumbers(10))
+    println(squareNumbers(20))
+    println()
+  }
 }
