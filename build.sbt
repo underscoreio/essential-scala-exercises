@@ -23,6 +23,26 @@ lazy val filmographyPart1 = project
   .dependsOn(utilities)
   .settings(commonSettings("filmographyPart1"))
 
+lazy val vector = project
+  .in(file("5-vector"))
+  .dependsOn(utilities)
+  .settings(commonSettings("vector"))
+
+lazy val counter = project
+  .in(file("6-counter"))
+  .dependsOn(utilities)
+  .settings(commonSettings("counter"))
+
+lazy val intList = project
+  .in(file("7-intList"))
+  .dependsOn(utilities)
+  .settings(commonSettings("intList"))
+
+lazy val intTree = project
+  .in(file("8-intTree"))
+  .dependsOn(utilities)
+  .settings(commonSettings("intTree"))
+
 lazy val utilities = project
   .in(file("utilities"))
   .settings(commonSettings("utilities"))
@@ -35,6 +55,10 @@ lazy val root = project
     listExpressions,
     functionExpressions,
     filmographyPart1,
+    vector,
+    counter,
+    intList,
+    intTree,
   )
 
 def commonSettings(projectName: String) =
