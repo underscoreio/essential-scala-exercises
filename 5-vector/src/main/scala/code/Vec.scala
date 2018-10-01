@@ -3,13 +3,11 @@ package code
 // Exercise 1:
 //
 // - Add a method to Vec that returns its length
-//
 //   Tip: you can take the square root a number with math.sqrt(num)
 //
 // - (Optional) Can you improve the printing situation?
 //
 // - (Optional, Harder) Can you improve the equality situation?
-//
 //   Tip: You'll need pattern matching with type ascription patterns
 
 
@@ -47,25 +45,21 @@ class Vec(val x: Double, val y: Double) {
   def length: Double =
     math.sqrt(x * x + y * y)
 
-  def *(scale: Double): Vec =
-    new Vec(x * scale, y * scale)
+  def *(scale: Double): CaseClassVec =
+    new CaseClassVec(x * scale, y * scale)
 
-  def +(that: Vec): Vec =
-    new Vec(this.x + that.x, this.y + that.y)
+  def +(that: CaseClassVec): CaseClassVec =
+    new CaseClassVec(this.x + that.x, this.y + that.y)
 
-  def rot90(cw: Boolean): Vec =
-    if(cw) {
-      new Vec(y, -x)
-    } else {
-      new Vec(-y, x)
-    }
+  def rot90(cw: Boolean): CaseClassVec =
+    if(cw) new CaseClassVec(y, -x) else new CaseClassVec(-y, x)
 
   override def toString: String =
     s"Vec($x, $y)"
 
   override def equals(that: Any): Boolean =
     that match {
-      case that: Vec =>
+      case that: CaseClassVec =>
         this.x == that.x && this.y == that.y
 
       case _ =>
@@ -74,20 +68,22 @@ class Vec(val x: Double, val y: Double) {
 }
 
 object Vec {
-  val zero: Vec =
-    new Vec(0, 0)
+  val zero: CaseClassVec =
+    new CaseClassVec(0, 0)
 
-  def apply(x: Double, y: Double): Vec =
-    new Vec(x, y)
+  def apply(x: Double, y: Double): CaseClassVec =
+    new CaseClassVec(x, y)
 
-  def longest(a: Vec, b: Vec): Vec =
+  def longest(a: CaseClassVec, b: CaseClassVec): CaseClassVec =
     if(a.length >= b.length) a else b
 }
 
+
+
 object VecExercise extends Exercise {
-  val vec1  = new Vec(1, 2)
-  val vec1b = new Vec(1, 2)
-  val vec2  = new Vec(3, 4)
+  val vec1  = new CaseClassVec(1, 2)
+  val vec1b = new CaseClassVec(1, 2)
+  val vec2  = new CaseClassVec(3, 4)
 
   override def main(args: Array[String]): Unit = {
     println("VEC")
@@ -116,8 +112,8 @@ object VecExercise extends Exercise {
     println()
 
     println("LONGEST")
-    println(Vec.longest(vec1, vec2))
-    println(Vec.longest(vec1 * 5, vec2))
+    println(CaseClassVec.longest(vec1, vec2))
+    println(CaseClassVec.longest(vec1 * 5, vec2))
     println()
   }
 }

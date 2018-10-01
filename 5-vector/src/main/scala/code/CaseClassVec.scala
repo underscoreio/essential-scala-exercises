@@ -9,34 +9,34 @@ package code
 //   - hashCode method
 //   - extractor pattern for use in pattern matching
 
-case class CcVec(x: Double, y: Double) {
+case class CaseClassVec(x: Double, y: Double) {
   def length: Double =
     math.sqrt(x * x + y * y)
 
-  def *(scale: Double): CcVec =
-    CcVec(x * scale, y * scale)
+  def *(scale: Double): CaseClassVec =
+    CaseClassVec(x * scale, y * scale)
 
-  def +(that: CcVec): CcVec =
-    CcVec(this.x + that.x, this.y + that.y)
+  def +(that: CaseClassVec): CaseClassVec =
+    CaseClassVec(this.x + that.x, this.y + that.y)
 
-  def rot90(cw: Boolean): CcVec =
-    if(cw) new CcVec(y, -x) else new CcVec(-y, x)
+  def rot90(cw: Boolean): CaseClassVec =
+    if(cw) new CaseClassVec(y, -x) else new CaseClassVec(-y, x)
 }
 
-object CcVec {
-  val zero: CcVec =
-    new CcVec(0, 0)
+object CaseClassVec {
+  val zero: CaseClassVec =
+    new CaseClassVec(0, 0)
 
-  def longest(a: CcVec, b: CcVec): CcVec =
+  def longest(a: CaseClassVec, b: CaseClassVec): CaseClassVec =
     if(a.length >= b.length) a else b
 }
 
 
 
 object CcVecExercise extends Exercise {
-  val vec1  = CcVec(1, 2)
-  val vec1b = CcVec(1, 2)
-  val vec2  = CcVec(3, 4)
+  val vec1  = CaseClassVec(1, 2)
+  val vec1b = CaseClassVec(1, 2)
+  val vec2  = CaseClassVec(3, 4)
 
   override def main(args: Array[String]): Unit = {
     println("VEC")
@@ -65,8 +65,8 @@ object CcVecExercise extends Exercise {
     println()
 
     println("LONGEST")
-    println(CcVec.longest(vec1, vec2))
-    println(CcVec.longest(vec1 * 5, vec2))
+    println(CaseClassVec.longest(vec1, vec2))
+    println(CaseClassVec.longest(vec1 * 5, vec2))
     println()
   }
 }

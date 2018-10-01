@@ -2,12 +2,12 @@ package code
 
 import org.scalatest._
 
-class IntListSpec extends FlatSpec with Matchers {
+class TailRecIntListSpec extends FlatSpec with Matchers {
 
   // Helper method to make it easier to build lists.
   // You'll see how this works in the Sequencing Computations section:
-  def intList(ints: Int *): IntList =
-    ints.foldRight[IntList](IntNil)(IntPair)
+  def intList(ints: Int *): TailRecIntList =
+    ints.foldRight[TailRecIntList](TailRecIntNil)(TailRecIntPair)
 
   "length" should "return the length of the list" in {
     intList().length should equal(0)
