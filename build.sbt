@@ -68,6 +68,11 @@ lazy val json = project
   .dependsOn(utilities)
   .settings(commonSettings("json"))
 
+lazy val filmographyPart2 = project
+  .in(file("12-filmographyPart2"))
+  .dependsOn(utilities)
+  .settings(commonSettings("filmographyPart2"))
+
 lazy val utilities = project
   .in(file("utilities"))
   .settings(commonSettings("utilities"))
@@ -89,6 +94,7 @@ lazy val root = project
     genericTree,
     json,
     calc,
+    filmographyPart2,
   )
 
 def commonSettings(projectName: String) =
