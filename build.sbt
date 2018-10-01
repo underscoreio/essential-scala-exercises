@@ -1,40 +1,45 @@
 lazy val hello = project
-  .in(file("0-hello"))
+  .in(file("00-hello"))
   .dependsOn(utilities)
   .settings(commonSettings("hello"))
 
 lazy val expressions = project
-  .in(file("1-expressions"))
+  .in(file("01-expressions"))
   .dependsOn(utilities)
   .settings(commonSettings("expressions"))
 
 lazy val listExpressions = project
-  .in(file("2-listExpressions"))
+  .in(file("02-listExpressions"))
   .dependsOn(utilities)
   .settings(commonSettings("listExpressions"))
 
 lazy val functionExpressions = project
-  .in(file("3-functionExpressions"))
+  .in(file("03-functionExpressions"))
   .dependsOn(utilities)
   .settings(commonSettings("functionExpressions"))
 
 lazy val filmographyPart1 = project
-  .in(file("4-filmographyPart1"))
+  .in(file("04-filmographyPart1"))
   .dependsOn(utilities)
   .settings(commonSettings("filmographyPart1"))
 
 lazy val vector = project
-  .in(file("5-vector"))
+  .in(file("05-vector"))
   .dependsOn(utilities)
   .settings(commonSettings("vector"))
 
 lazy val counter = project
-  .in(file("6-counter"))
+  .in(file("06-counter"))
   .dependsOn(utilities)
   .settings(commonSettings("counter"))
 
+lazy val shape = project
+  .in(file("07-shape"))
+  .dependsOn(utilities)
+  .settings(commonSettings("shape"))
+
 lazy val intList = project
-  .in(file("7-intList"))
+  .in(file("08-intList"))
   .dependsOn(utilities)
   .settings(commonSettings("intList"))
 
@@ -44,7 +49,7 @@ lazy val intTree = project
   .settings(commonSettings("intTree"))
 
 lazy val genericList = project
-  .in(file("8-genericList"))
+  .in(file("09-genericList"))
   .dependsOn(utilities)
   .settings(commonSettings("genericList"))
 
@@ -52,6 +57,16 @@ lazy val genericTree = project
   .in(file("x2-genericTree"))
   .dependsOn(utilities)
   .settings(commonSettings("genericTree"))
+
+lazy val calc = project
+  .in(file("10-calc"))
+  .dependsOn(utilities)
+  .settings(commonSettings("calc"))
+
+lazy val json = project
+  .in(file("11-json"))
+  .dependsOn(utilities)
+  .settings(commonSettings("json"))
 
 lazy val utilities = project
   .in(file("utilities"))
@@ -67,10 +82,13 @@ lazy val root = project
     filmographyPart1,
     vector,
     counter,
+    shape,
     intList,
     intTree,
     genericList,
     genericTree,
+    json,
+    calc,
   )
 
 def commonSettings(projectName: String) =
