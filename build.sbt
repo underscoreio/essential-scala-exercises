@@ -73,6 +73,11 @@ lazy val filmographyPart2 = project
   .dependsOn(utilities)
   .settings(commonSettings("filmographyPart2"))
 
+lazy val monoids = project
+  .in(file("13-monoids"))
+  .dependsOn(utilities)
+  .settings(commonSettings("monoids"))
+
 lazy val utilities = project
   .in(file("utilities"))
   .settings(commonSettings("utilities"))
@@ -95,6 +100,7 @@ lazy val root = project
     json,
     calc,
     filmographyPart2,
+    monoids,
   )
 
 def commonSettings(projectName: String) =
