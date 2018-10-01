@@ -22,4 +22,22 @@ class CalcSpec extends FlatSpec with Matchers {
     Calc.print(calc) should be("(1 + 2) * (3 + 4)")
   }
 
+  "safeEval" should "evaluate a valid calculation" in {
+    val calc = Add(Mul(Num(1), Num(2)), Mul(Num(3), Num(4)))
+
+    Calc.safeEval(calc) should be(Right(14))
+  }
+
+  it should "evaluate a valid division" in {
+    val calc = Div(Num(6), Num(2))
+
+    Calc.safeEval(calc) should be(Right(3))
+  }
+
+  it should "fail on a division by zero" in {
+    val calc = Div(Num(6), Num(0))
+
+    Calc.safeEval(calc) should be(Left("Attempt to divide 6 by 0"))
+  }
+
 }

@@ -1,18 +1,6 @@
 package code
 
-// Exercise 1:
-//
-// Make MyList generic:
-// - give it a type parameter A
-// - look for Ints in the codebase and replace them with As
-// - if any methods clearly don't transfer across, comment them out
-//
-//
-//
-// Exercise 2 (to be done later):
-//
-// - Make MyList covariant
-// - Add a ++ method to append two lists
+// Covariant version of the invariant implementation in MyList
 
 sealed trait CovariantMyList[+A] {
   def length: Int =
@@ -26,20 +14,6 @@ sealed trait CovariantMyList[+A] {
       case CovariantMyPair(h, t) => h == item || t.contains(item)
       case CovariantMyNil        => false
     }
-
-  // This method doesn't transfer because it requires us to know about Ints and addition:
-  //  def addToEach(num: Int): CovariantMyList[A] =
-  //    this match {
-  //      case CovariantMyPair(h, t) => CovariantMyPair(h + num, t.addToEach(num))
-  //      case CovariantMyNil        => CovariantMyNil
-  //    }
-
-  // This method doesn't transfer because it requires us to know about Ints and addition:
-  //  def sum: Int =
-  //    this match {
-  //      case CovariantMyPair(h, t) => h + t.sum
-  //      case CovariantMyNil        => 0
-  //    }
 
   def exists[B >: A](func: B => Boolean): Boolean =
     this match {
@@ -74,6 +48,18 @@ sealed trait CovariantMyList[+A] {
     this match {
       case CovariantMyPair(head, tail) => CovariantMyPair(head, tail ++ that)
       case CovariantMyNil              => that
+    }
+
+  def map[B](func: A => B): CovariantMyList[B] =
+    this match {
+      case CovariantMyPair(head, tail) => CovariantMyPair(func(head), tail.map(func))
+      case CovariantMyNil              => CovariantMyNil
+    }
+
+  def flatMap[B](func: A => CovariantMyList[B]): CovariantMyList[B] =
+    this match {
+      case CovariantMyPair(head, tail) => func(head) ++ tail.flatMap(func)
+      case CovariantMyNil              => CovariantMyNil
     }
 }
 

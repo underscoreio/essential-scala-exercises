@@ -47,6 +47,8 @@ package code
 //      - either use an Option to wrap the result, or introduce your own IntOption ADT
 //
 //  - (Optional, Harder) — make as many of your methods tail recursive as possible
+//    - Fork your code by copying the file if you do this!
+//    - We'll be working with this code again and, ultimately, it'll be easier to not have the extra complexity.
 
 sealed trait IntList {
   def length: Int =

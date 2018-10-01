@@ -6,12 +6,37 @@ package code
 // - give it a type parameter A
 // - look for Ints in the codebase and replace them with As
 // - if any methods clearly don't transfer across, comment them out
-//
-//
-// Exercise 2 (to be done later):
+
+
+// Exercise 2 (for later on):
 //
 // - Make MyList covariant
 // - Add a ++ method to append two lists
+
+
+// Exercise 3 (for even later on):
+//
+// - Implement foldLeft and foldRight for MyList
+// - Reimplement everything else in terms of them!
+// - (Optional, Very Hard) Implement foldRight in terms of foldLeft,
+//   making it stack safe
+
+
+// Exercise 4 (you can't believe how later on this is going to be):
+//
+// - Implement map on MyList
+//   - For bonus points implement it in terms of foldRight
+// - Can we use map to implement addToEach from IntList? Yes!
+// - Reimplement add using map
+
+
+// Exercise 4 (just, like, so late... don't even):
+//
+// - Implement map on MyList
+//   - For bonus points implement it in terms of foldRight
+// - Can we use map to implement addToEach from IntList? Yes!
+// - Reimplement add using map
+
 
 sealed trait MyList[A] {
   def length: Int =
@@ -73,6 +98,18 @@ sealed trait MyList[A] {
     this match {
       case MyPair(head, tail) => MyPair(head, tail ++ that)
       case MyNil()            => that
+    }
+
+  def map[B](func: A => B): MyList[B] =
+    this match {
+      case MyPair(head, tail) => MyPair(func(head), tail.map(func))
+      case MyNil()            => MyNil()
+    }
+
+  def flatMap[B](func: A => MyList[B]): MyList[B] =
+    this match {
+      case MyPair(head, tail) => func(head) ++ tail.flatMap(func)
+      case MyNil()            => MyNil()
     }
 }
 

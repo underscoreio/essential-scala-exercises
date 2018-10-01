@@ -1,5 +1,7 @@
 package code
 
+// Exercise 1:
+//
 // Design and implement:
 // - An ADT Calc representing an integer expression as a data structure:
 //   - support the four basic operators: +, -, *, /
@@ -7,6 +9,15 @@ package code
 // - A companion object for Calc containing:
 //   - an eval method that runs a calculation
 //   - a print method that prints a calculation as a friendly string
+
+// Exercise 2 (to be completed later):
+//
+// Implement a method safeEval in the companion object for Calc that
+// - returns an Either[String, Int]
+// - guards against division-by-zero errors
+// - includes the numerator and denominator
+//   in the error message in the event of failure
+
 
 sealed trait Calc
 case class Add(l: Calc, r: Calc) extends Calc
@@ -23,6 +34,41 @@ object Calc {
       case Mul(l, r) => eval(l) * eval(r)
       case Div(l, r) => eval(l) / eval(r)
       case Num(n)    => n
+    }
+
+  def safeEval(calc: Calc): Either[String, Int] =
+    calc match {
+      case Add(l, r) =>
+        for {
+          l <- safeEval(l)
+          r <- safeEval(r)
+        } yield l + r
+
+      case Sub(l, r) =>
+        for {
+          l <- safeEval(l)
+          r <- safeEval(r)
+        } yield l - r
+
+      case Mul(l, r) =>
+        for {
+          l <- safeEval(l)
+          r <- safeEval(r)
+        } yield l * r
+
+      case Div(l, r) =>
+        for {
+          l <- safeEval(l)
+          r <- safeEval(r)
+          a <- if(r == 0) {
+                 Left(s"Attempt to divide $l by $r")
+               } else {
+                 Right(l / r)
+               }
+        } yield a
+
+      case Num(n) =>
+        Right(n)
     }
 
   def print(calc: Calc): String =

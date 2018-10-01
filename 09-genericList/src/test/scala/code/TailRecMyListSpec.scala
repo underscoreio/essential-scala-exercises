@@ -7,7 +7,7 @@ class TailRecMyListSpec extends FlatSpec with Matchers {
   // Helper method to make it easier to build lists.
   // You'll see how this works in the Sequencing Computations section:
   def list[A](items: A *): TailRecMyList[A] =
-    items.foldRight[TailRecMyList[A]](TailRecMyNil())(TailRecMyPair[A])
+    items.foldRight[TailRecMyList[A]](TailRecMyNil)(TailRecMyPair[A])
 
   "length" should "return the length of the list" in {
     list().length should equal(0)
