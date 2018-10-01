@@ -1,6 +1,8 @@
 package code
 
-// Exercise: Implement your list of integers as a class called IntList!
+// Exercise:
+//
+// Implement your list of integers as a class called IntList!
 //
 // Tip: Implement the methods below one at a time,
 // checking them against the unit tests before moving on to the next

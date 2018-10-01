@@ -69,6 +69,8 @@ lazy val root = project
     counter,
     intList,
     intTree,
+    genericList,
+    genericTree,
   )
 
 def commonSettings(projectName: String) =
