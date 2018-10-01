@@ -1,25 +1,13 @@
 package code
 
-sealed trait JsonValue {
-  def get(path: List[String]): Option[JsonValue] =
-    path match {
-      case head :: tail =>
-        this match {
-          case JsonObject(fields) =>
-            fields
-              .find { case (n, _) => n == head }
-              .flatMap { case (_, v) => v.get(tail) }
-          case JsonArray(_) => None
-          case JsonBoolean(_) => None
-          case JsonNumber(_) => None
-          case JsonString(_) => None
-          case JsonNull => None
-        }
+// Exercise :
+//
+// Design and implement:
+// - a JsonValue ADT representing a JSON datum
+// - a Json object containing a stringify method
+//   that renders a JsonValue as a compact string
 
-      case Nil => Some(this)
-    }
-}
-
+sealed trait JsonValue
 case class JsonObject(fields: List[(String, JsonValue)]) extends JsonValue
 case class JsonArray(items: List[JsonValue]) extends JsonValue
 case class JsonBoolean(value: Boolean) extends JsonValue

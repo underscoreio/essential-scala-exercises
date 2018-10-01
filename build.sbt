@@ -78,6 +78,11 @@ lazy val monoids = project
   .dependsOn(utilities)
   .settings(commonSettings("monoids"))
 
+lazy val extensionMethods = project
+  .in(file("14-extensionMethods"))
+  .dependsOn(utilities)
+  .settings(commonSettings("extensionMethods"))
+
 lazy val utilities = project
   .in(file("utilities"))
   .settings(commonSettings("utilities"))

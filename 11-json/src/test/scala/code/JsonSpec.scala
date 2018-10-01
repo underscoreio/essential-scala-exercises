@@ -24,35 +24,4 @@ class JsonSpec extends FlatSpec with Matchers {
 
     Json.stringify(jsonValue) should equal(jsonString)
   }
-
-  "get" should "find a field if it exists" in {
-    val baz: JsonValue =
-      JsonArray(List(
-        JsonNumber(1),
-        JsonNumber(2),
-        JsonNumber(3),
-      ))
-
-    val bar: JsonValue =
-      JsonObject(List(
-        "baz" -> baz
-      ))
-
-    val foo: JsonValue =
-      JsonObject(List(
-        "bar" -> bar
-      ))
-
-    val top: JsonValue =
-      JsonObject(List(
-        "foo" -> foo
-      ))
-
-    top.get(Nil) should equal(Some(top))
-    top.get(List("foo")) should equal(Some(foo))
-    top.get(List("foo", "bar")) should equal(Some(bar))
-    top.get(List("foo", "bar", "baz")) should equal(Some(baz))
-
-    top.get(List("bar")) should equal(None)
-  }
 }

@@ -1,12 +1,14 @@
 package code
 
-object FilmographyPart1 extends Exercise {
+// Exercise:
+//
+// Complete the methods below
+//
+// The source code for Director and Film,
+// and the FilmTestData used in the unit tests,
+// are in the "utilities" project.
 
-  // Complete the following methods
-  //
-  // The source code for Director and Film,
-  // and the FilmTestData used in the unit tests,
-  // are in the "utilities" project.
+object FilmographyPart1 extends Exercise {
 
   def namesOfFilms(films: List[Film]): List[String] =
     films.map(film => film.name)

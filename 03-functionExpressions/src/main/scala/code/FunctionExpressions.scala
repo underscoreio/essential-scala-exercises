@@ -1,17 +1,19 @@
 package code
 
-object FunctionExpressions extends Exercise {
+// Exercise:
+//
+// Rewrite each method using function syntax:
+//
+// 1. define the relevant function types below using type aliases
+//
+// 2. write function equivalents of each method
+//    using anonymous function syntax
+//
+// 3. as an alternative to redefining the methods as functions,
+//    try to "lift" them to functions by assigning them
+//    to a variable of the relevant function type
 
-  // Rewrite these methods using function syntax:
-  //
-  // 1. define the relevant function types below using type aliases
-  //
-  // 2. write function equivalents of each method
-  //    using anonymous function syntax
-  //
-  // 3. as an alternative to redefining the methods as functions,
-  //    try to "lift" them to functions by assigning them
-  //    to a variable of the relevant function type
+object FunctionExpressions extends Exercise {
 
   def greet(name: String): String =
     "Hello " + name
@@ -28,7 +30,6 @@ object FunctionExpressions extends Exercise {
     greet
 
 
-
   def now: Long =
     System.currentTimeMillis
 
@@ -38,14 +39,12 @@ object FunctionExpressions extends Exercise {
   // Function literal
   // Function literals must take one parenthesis list
   val nowFunc: NowFunc =
-  () => System.currentTimeMillis
+    () => System.currentTimeMillis
 
   // Lift the method to a function
   // We need _ here because the method has no parameter lists
   val nowFunc2: NowFunc =
-  now _
-
-
+    now _
 
 
   def repeat(func: Int => Int): Int => Int =
@@ -62,7 +61,6 @@ object FunctionExpressions extends Exercise {
   // Lift the method to a function
   val repeatFunc2: RepeatFunc =
     repeat
-
 
 
   override def main(args: Array[String]): Unit = {

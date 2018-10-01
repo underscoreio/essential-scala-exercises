@@ -11,8 +11,7 @@ package code
 //   Tip: You'll need pattern matching with type ascription patterns
 
 
-
-// Exercise 2:
+// Exercise 2 (for later):
 //
 // - Write a * operator to scale a Vec by a Double amount
 //
@@ -25,8 +24,7 @@ package code
 //   - rotate the Vec 90 degrees anticlockwise if cw == false
 
 
-
-// Exercise 3:
+// Exercise 3 (for later still):
 //
 // Define a companion object for Vec:
 // - Give it a value `zero` containing a 0,0 Vec
@@ -38,7 +36,6 @@ package code
 // - Give it a method `longest` that
 //   - accepts two parameters of type Vec
 //   - returns the Vec with the largest length
-
 
 
 class Vec(val x: Double, val y: Double) {

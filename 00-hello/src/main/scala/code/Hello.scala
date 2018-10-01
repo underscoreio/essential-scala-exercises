@@ -1,5 +1,9 @@
 package code
 
+// This isn't really an exercise.
+//
+// It's just here to check everything is working...
+
 object Hello extends Exercise {
 
   println(

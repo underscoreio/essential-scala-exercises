@@ -1,5 +1,13 @@
 package code
 
+// Exercise:
+//
+// Write a Counter class to manage increments to a number:
+//
+// - Give it a constructor that takes a single number as a parameter
+// - Give it a method "value" that returns the number
+// - Give it a method "inc" that increases the counter by 1
+
 class Counter(num: Int) {
   def value = num
 

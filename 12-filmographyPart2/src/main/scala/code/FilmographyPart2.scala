@@ -1,5 +1,13 @@
 package code
 
+// Exercise:
+//
+// Complete the methods below
+//
+// The source code for Director and Film,
+// and the FilmTestData used in the unit tests,
+// are in the "utilities" project.
+
 object FilmographyPart2 extends Exercise {
 
   def directorsWithBackCatalogOfSize(directors: List[Director], numberOfFilms: Int): List[Director] =

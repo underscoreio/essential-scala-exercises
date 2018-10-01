@@ -1,14 +1,38 @@
 package code
 
+// Exercise:
+//
+// Using only the following methods of List:
+//   List[A].head   => A
+//   List[A].tail   => List[A]
+//   List[A].length => Int
+//   List[A].++(List[A]) => List[A]
+//
+// Write the following methods:
+//
+// - sum
+//   - accepts no parameters
+//   - sums all the numbers in the list
+//
+// - contains
+//   - accepts a List[Int] and an Int value
+//   - returns true if the value appears in the list
+//
+// - (Harder) containsAll
+//   - accepts two Lists[Int] x and y
+//   - returns true if all the elements of y appear in x
+//
+// - (Harder still) squareNumbers
+//   - accepts an Int max as a parameter
+//   - returns a list of the square numbers from 1 to max inclusive
+//
+// Tip: a square number is the result of
+// multiplying another number by itself...
+// 1*1, 2*2, 3*3, ...
+
+
 object ListExpressions extends Exercise {
 
-  // Using only the following methods of List:
-  //   List[A].head   => A
-  //   List[A].tail   => List[A]
-  //   List[A].length => Int
-  //   List[A].++(List[A]) => List[A]
-
-  // Write a method to sum a list of numbers
   def sum(nums: List[Int]): Int =
     if(nums.length == 0) {
       0
@@ -16,9 +40,6 @@ object ListExpressions extends Exercise {
       nums.head + sum(nums.tail)
     }
 
-  // Write a method that:
-  // - accepts a list of numbers l and a number n as parameters
-  // - returns true if n appears within l, false otherwise
   def contains(l: List[Int], n: Int): Boolean =
     if(l.length == 0) {
       false
@@ -26,9 +47,6 @@ object ListExpressions extends Exercise {
       l.head == n || contains(l.tail, n)
     }
 
-  // (Harder) Write a method that:
-  // - accepts two lists of numbers x and y
-  // - returns true every number in y appears in x
   def containsAll(x: List[Int], y: List[Int]): Boolean =
     if(y.length == 0) {
       true
@@ -36,13 +54,6 @@ object ListExpressions extends Exercise {
       contains(x, y.head) && containsAll(x, y.tail)
     }
 
-  // (Harder still) Write a method that:
-  // - accepts an Int max as a parameter
-  // - returns a list of the square numbers from 1 to max inclusive
-  //
-  // Tip: a square number is the result of
-  // multiplying another number by itself...
-  // 1*1, 2*2, 3*3, ...
   def squareNumbers(max: Int): List[Int] = {
     def loop(n: Int, accum: List[Int]): List[Int] = {
       val sq = n*n

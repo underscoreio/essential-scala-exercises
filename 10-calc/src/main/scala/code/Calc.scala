@@ -10,6 +10,7 @@ package code
 //   - an eval method that runs a calculation
 //   - a print method that prints a calculation as a friendly string
 
+
 // Exercise 2 (to be completed later):
 //
 // Implement a method safeEval in the companion object for Calc that
