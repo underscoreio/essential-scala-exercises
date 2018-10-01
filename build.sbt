@@ -39,9 +39,19 @@ lazy val intList = project
   .settings(commonSettings("intList"))
 
 lazy val intTree = project
-  .in(file("8-intTree"))
+  .in(file("x1-intTree"))
   .dependsOn(utilities)
   .settings(commonSettings("intTree"))
+
+lazy val genericList = project
+  .in(file("8-genericList"))
+  .dependsOn(utilities)
+  .settings(commonSettings("genericList"))
+
+lazy val genericTree = project
+  .in(file("x2-genericTree"))
+  .dependsOn(utilities)
+  .settings(commonSettings("genericTree"))
 
 lazy val utilities = project
   .in(file("utilities"))
