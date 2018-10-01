@@ -98,12 +98,20 @@ class IntTreeSpec extends FlatSpec with Matchers {
         node(3, node(6), node(7)))
 
     val tree2 =
-      node(2, node(4), node(5, r = node(3, node(6), node(7))))
+      node(2, node(4), node(5)) ++ node(3, node(6), node(7))
 
     val tree3 =
-      node(4, r = node(5, r = node(6, r = node(7))))
+      node(4) ++ node(5) ++ node(6) ++ node(7)
 
     tree1.filter(n => n > 1) should equal(tree2)
     tree1.filter(n => n > 3) should equal(tree3)
+  }
+
+  "++" should "append trees" in {
+    // Note: These tests verify a helper method I used for filter.
+    // Don't worry about them if you wrote filter in a different way.
+
+    node(1) ++ node(2) should equal(node(1, r = node(2)))
+    node(1, r = node(2)) ++ node(3) should equal(node(1, r = node(2, r = node(3))))
   }
 }
