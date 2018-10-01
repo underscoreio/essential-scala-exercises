@@ -27,18 +27,18 @@ sealed trait MyList[A] {
     }
 
   // This method doesn't transfer because it requires us to know about Ints and addition:
-  //  def addToEach(num: Int): MyList[A] =
-  //    this match {
-  //      case MyPair(h, t) => MyPair(h + num, t.addToEach(num))
-  //      case MyNil()      => MyNil()
-  //    }
+  // def addToEach(num: Int): MyList[A] =
+  //   this match {
+  //     case MyPair(h, t) => MyPair(h + num, t.addToEach(num))
+  //     case MyNil()      => MyNil()
+  //   }
 
   // This method doesn't transfer because it requires us to know about Ints and addition:
-  //  def sum: Int =
-  //    this match {
-  //      case MyPair(h, t) => h + t.sum
-  //      case MyNil()      => 0
-  //    }
+  // def sum: Int =
+  //   this match {
+  //     case MyPair(h, t) => h + t.sum
+  //     case MyNil()      => 0
+  //   }
 
   def exists(func: A => Boolean): Boolean =
     this match {
