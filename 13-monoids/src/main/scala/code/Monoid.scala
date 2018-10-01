@@ -99,135 +99,76 @@ package code
 //   - accepts an implicit Monoid[A]
 //   - folds down the list adding all the elements together
 
-trait Monoid[A] {
-  def empty: A
-  def combine(x: A, y: A): A
-}
 
-object Monoid {
-  def apply[A](implicit monoid: Monoid[A]): Monoid[A] =
-    monoid
+trait Monoid[A]
+// etc...
 
-  // Helper method to reduce boilerplate below:
-  def create[A](_empty: A)(_combine: (A, A) => A): Monoid[A] =
-    new Monoid[A] {
-      override def empty: A =
-        _empty
-
-      override def combine(x: A, y: A): A =
-        _combine(x, y)
-    }
-
-  implicit val intMonoid: Monoid[Int] =
-    create(0)((a, b) => a + b)
-
-  implicit val doubleMonoid: Monoid[Double] =
-    create(0.0)((a, b) => a + b)
-
-  implicit val stringMonoid: Monoid[String] =
-    create("")((a, b) => a + b)
-
-  implicit def listMonoid[A]: Monoid[List[A]] =
-    create[List[A]](Nil)((a, b) => a ++ b)
-
-  implicit def optionMonoid[A](implicit monoid: Monoid[A]): Monoid[Option[A]] =
-    create[Option[A]](None) {
-      case (None,    None)    => None
-      case (Some(a), None)    => Some(a)
-      case (None,    Some(b)) => Some(b)
-      case (Some(a), Some(b)) => Some(monoid.combine(a, b))
-    }
-
-  implicit def tuple2Monoid[A, B](implicit aMonoid: Monoid[A], bMonoid: Monoid[B]): Monoid[(A, B)] =
-    create[(A, B)]((aMonoid.empty, bMonoid.empty)) {
-      case ((a1, b1), (a2, b2)) =>
-        (aMonoid.combine(a1, a2), bMonoid.combine(b1, b2))
-    }
-}
-
-object MonoidSyntax {
-  def empty[A](implicit monoid: Monoid[A]): A =
-    monoid.empty
-
-  def combine[A](x: A, y: A)(implicit monoid: Monoid[A]): A =
-    monoid.combine(x, y)
-
-  implicit class MonoidOps[A](x: A) {
-    def |+|(y: A)(implicit monoid: Monoid[A]): A =
-      monoid.combine(x, y)
-  }
-
-  implicit class MonoidListOps[A](list: List[A]) {
-    def combineAll(implicit monoid: Monoid[A]): A =
-      list.foldLeft(monoid.empty)(monoid.combine)
-  }
-}
 
 object MonoidExercise extends Exercise {
-  println("CALLING EMPTY DIRECTLY")
-  println(Monoid.intMonoid.empty)
-  println(Monoid.stringMonoid.empty)
-  println(Monoid.doubleMonoid.empty)
-  println(Monoid.listMonoid[Int].empty)
-  println()
+  // println("CALLING EMPTY DIRECTLY")
+  // println(Monoid.intMonoid.empty)
+  // println(Monoid.stringMonoid.empty)
+  // println(Monoid.doubleMonoid.empty)
+  // println(Monoid.listMonoid[Int].empty)
+  // println()
 
-  println("CALLING COMBINE DIRECTLY")
-  println(Monoid.intMonoid.combine(1, 2))
-  println(Monoid.stringMonoid.combine("foo", "bar"))
-  println(Monoid.doubleMonoid.combine(1.2, 3.4))
-  println(Monoid.listMonoid[Int].combine(List(1, 2), List(3, 4)))
-  println()
+  // println("CALLING COMBINE DIRECTLY")
+  // println(Monoid.intMonoid.combine(1, 2))
+  // println(Monoid.stringMonoid.combine("foo", "bar"))
+  // println(Monoid.doubleMonoid.combine(1.2, 3.4))
+  // println(Monoid.listMonoid[Int].combine(List(1, 2), List(3, 4)))
+  // println()
 
-  println("CALLING EMPTY ON A SUMMONED INSTANCE")
-  println(Monoid[Int].empty)
-  println(Monoid[String].empty)
-  println(Monoid[Double].empty)
-  println(Monoid[List[Int]].empty)
-  println()
+  // println("CALLING EMPTY ON A SUMMONED INSTANCE")
+  // println(Monoid[Int].empty)
+  // println(Monoid[String].empty)
+  // println(Monoid[Double].empty)
+  // println(Monoid[List[Int]].empty)
+  // println()
 
-  println("CALLING COMBINE ON A SUMMONED INSTANCE")
-  println(Monoid[Int].combine(1, 2))
-  println(Monoid[String].combine("foo", "bar"))
-  println(Monoid[Double].combine(1.2, 3.4))
-  println(Monoid[List[Int]].combine(List(1, 2), List(3, 4)))
-  println(Monoid[Option[Int]].combine(Option(123), Option(456)))
-  println(Monoid[(String, Int)].combine(("A", 1), ("B", 2)))
-  println()
+  // println("CALLING COMBINE ON A SUMMONED INSTANCE")
+  // println(Monoid[Int].combine(1, 2))
+  // println(Monoid[String].combine("foo", "bar"))
+  // println(Monoid[Double].combine(1.2, 3.4))
+  // println(Monoid[List[Int]].combine(List(1, 2), List(3, 4)))
+  // println(Monoid[Option[Int]].combine(Option(123), Option(456)))
+  // println(Monoid[(String, Int)].combine(("A", 1), ("B", 2)))
+  // println()
 
-  import MonoidSyntax._
+  // import MonoidSyntax._
 
-  println("USING MONOIDSYNTAX EMPTY")
-  println(empty[Int])
-  println(empty[String])
-  println(empty[Double])
-  println(empty[List[Int]])
-  println(empty[Option[Int]])
-  println(empty[(String, Int)])
-  println()
+  // println("USING MONOIDSYNTAX EMPTY")
+  // println(empty[Int])
+  // println(empty[String])
+  // println(empty[Double])
+  // println(empty[List[Int]])
+  // println(empty[Option[Int]])
+  // println(empty[(String, Int)])
+  // println()
 
-  println("USING MONOIDSYNTAX COMBINE")
-  println(combine(1, 2))
-  println(combine("foo", "bar"))
-  println(combine(1.2, 3.4))
-  println(combine(List(1, 2), List(3, 4)))
-  println(combine(Option(123), Option(456)))
-  println(combine(("A", 1), ("B", 2)))
-  println()
+  // println("USING MONOIDSYNTAX COMBINE")
+  // println(combine(1, 2))
+  // println(combine("foo", "bar"))
+  // println(combine(1.2, 3.4))
+  // println(combine(List(1, 2), List(3, 4)))
+  // println(combine(Option(123), Option(456)))
+  // println(combine(("A", 1), ("B", 2)))
+  // println()
 
-  println("USING MONOIDSYNTAX |+|")
-  println(1 |+| 2)
-  println("foo" |+| "bar")
-  println(1.2 |+| 3.4)
-  println(List(1, 2) |+| List(3, 4))
-  println(Option(123) |+| Option(456))
-  println(("A", 1) |+| (("B", 2)))
-  println()
+  // println("USING MONOIDSYNTAX |+|")
+  // println(1 |+| 2)
+  // println("foo" |+| "bar")
+  // println(1.2 |+| 3.4)
+  // println(List(1, 2) |+| List(3, 4))
+  // println(Option(123) |+| Option(456))
+  // println(("A", 1) |+| (("B", 2)))
+  // println()
 
-  println("USING MONOIDSYNTAX COMBINEALL")
-  println(List(1, 2, 3).combineAll)
-  println(List("foo", "bar", "baz").combineAll)
-  println(List(1.2, 3.4, 5.6).combineAll)
-  println(List(Some(123), None, Some(456)).combineAll)
-  println(List(("A", 1), ("B", 2), ("C", 3)).combineAll)
-  println()
+  // println("USING MONOIDSYNTAX COMBINEALL")
+  // println(List(1, 2, 3).combineAll)
+  // println(List("foo", "bar", "baz").combineAll)
+  // println(List(1.2, 3.4, 5.6).combineAll)
+  // println(List(Some(123), None, Some(456)).combineAll)
+  // println(List(("A", 1), ("B", 2), ("C", 3)).combineAll)
+  // println()
 }

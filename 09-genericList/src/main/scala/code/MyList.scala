@@ -2,10 +2,13 @@ package code
 
 // Exercise 1:
 //
-// Make MyList generic:
+// The code below is a copy of IntList, renamed to MyList.
+//
+// Make MyList generic in the type of data it holds:
 // - give it a type parameter A
-// - look for Ints in the codebase and replace them with As
+// - look for any erroneous Ints in the codebase and replace them with As
 // - if any methods clearly don't transfer across, comment them out
+// - do whatever else you have to to make it compile
 
 
 // Exercise 2 (for later on):
@@ -38,80 +41,61 @@ package code
 // - Reimplement add using map
 
 
-sealed trait MyList[A] {
+sealed trait MyList {
   def length: Int =
     this match {
       case MyPair(_, t) => 1 + t.length
-      case MyNil()      => 0
+      case MyNil        => 0
     }
 
-  def contains(item: A): Boolean =
+  def contains(item: Int): Boolean =
     this match {
       case MyPair(h, t) => h == item || t.contains(item)
-      case MyNil()      => false
+      case MyNil        => false
     }
 
-  // This method doesn't transfer because it requires us to know about Ints and addition:
-  // def addToEach(num: Int): MyList[A] =
-  //   this match {
-  //     case MyPair(h, t) => MyPair(h + num, t.addToEach(num))
-  //     case MyNil()      => MyNil()
-  //   }
+  def addToEach(num: Int): MyList =
+    this match {
+      case MyPair(h, t) => MyPair(h + num, t.addToEach(num))
+      case MyNil        => MyNil
+    }
 
-  // This method doesn't transfer because it requires us to know about Ints and addition:
-  // def sum: Int =
-  //   this match {
-  //     case MyPair(h, t) => h + t.sum
-  //     case MyNil()      => 0
-  //   }
+  def sum: Int =
+    this match {
+      case MyPair(h, t) => h + t.sum
+      case MyNil        => 0
+    }
 
-  def exists(func: A => Boolean): Boolean =
+  def exists(func: Int => Boolean): Boolean =
     this match {
       case MyPair(h, t) => func(h) || t.exists(func)
-      case MyNil()      => false
+      case MyNil        => false
     }
 
-  def filter(func: A => Boolean): MyList[A] =
+  def filter(func: Int => Boolean): MyList =
     this match {
       case MyPair(h, t) =>
         if(func(h)) MyPair(h, t.filter(func)) else t.filter(func)
-      case MyNil()      => MyNil()
+      case MyNil        => MyNil
     }
 
-  def reverse: MyList[A] = {
-    def loop(list: MyList[A], accum: MyList[A]): MyList[A] =
+  def reverse: MyList = {
+    def loop(list: MyList, accum: MyList): MyList =
       list match {
         case MyPair(h, t) => loop(t, MyPair(h, accum))
-        case MyNil()      => accum
+        case MyNil        => accum
       }
 
-    loop(this, MyNil())
+    loop(this, MyNil)
   }
 
-  def find(func: A => Boolean): Option[A] =
+  def find(func: Int => Boolean): Option[Int] =
     this match {
       case MyPair(h, t) => if(func(h)) Some(h) else t.find(func)
-      case MyNil()      => None
-    }
-
-  def ++(that: MyList[A]): MyList[A] =
-    this match {
-      case MyPair(head, tail) => MyPair(head, tail ++ that)
-      case MyNil()            => that
-    }
-
-  def map[B](func: A => B): MyList[B] =
-    this match {
-      case MyPair(head, tail) => MyPair(func(head), tail.map(func))
-      case MyNil()            => MyNil()
-    }
-
-  def flatMap[B](func: A => MyList[B]): MyList[B] =
-    this match {
-      case MyPair(head, tail) => func(head) ++ tail.flatMap(func)
-      case MyNil()            => MyNil()
+      case MyNil        => None
     }
 }
 
-case class MyPair[A](head: A, tail: MyList[A]) extends MyList[A]
-case class MyNil[A]() extends MyList[A]
+case class MyPair(head: Int, tail: MyList) extends MyList
+
+case object MyNil extends MyList

@@ -33,58 +33,26 @@ package code
 
 object ListExpressions extends Exercise {
 
-  def sum(nums: List[Int]): Int =
-    if(nums.length == 0) {
-      0
-    } else {
-      nums.head + sum(nums.tail)
-    }
-
-  def contains(l: List[Int], n: Int): Boolean =
-    if(l.length == 0) {
-      false
-    } else {
-      l.head == n || contains(l.tail, n)
-    }
-
-  def containsAll(x: List[Int], y: List[Int]): Boolean =
-    if(y.length == 0) {
-      true
-    } else {
-      contains(x, y.head) && containsAll(x, y.tail)
-    }
-
-  def squareNumbers(max: Int): List[Int] = {
-    def loop(n: Int, accum: List[Int]): List[Int] = {
-      val sq = n*n
-      if(sq <= max) {
-        loop(n + 1, sq :: accum)
-      } else {
-        accum
-      }
-    }
-
-    loop(1, Nil)
-  }
+  // Write your methods here
 
   override def main(args: Array[String]): Unit = {
-    println("SUM")
-    println(sum(List(1, 2, 3)))
-    println()
+    // println("SUM")
+    // println(sum(List(1, 2, 3)))
+    // println()
 
-    println("CONTAINS")
-    println(contains(List(1, 2, 3), 2))
-    println(contains(List(1, 2, 3), 4))
-    println()
+    // println("CONTAINS")
+    // println(contains(List(1, 2, 3), 2))
+    // println(contains(List(1, 2, 3), 4))
+    // println()
 
-    println("CONTAINS ALL")
-    println(containsAll(List(1, 2, 3), List(2, 3)))
-    println(containsAll(List(1, 2, 3), List(4, 3)))
-    println()
+    // println("CONTAINS ALL")
+    // println(containsAll(List(1, 2, 3), List(2, 3)))
+    // println(containsAll(List(1, 2, 3), List(4, 3)))
+    // println()
 
-    println("SQUARE NUMBERS")
-    println(squareNumbers(10))
-    println(squareNumbers(20))
-    println()
+    // println("SQUARE NUMBERS")
+    // println(squareNumbers(10))
+    // println(squareNumbers(20))
+    // println()
   }
 }
